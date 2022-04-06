@@ -1,0 +1,8 @@
+const INCREASE = "INCREASE";
+const DECREASE = "DECREASE";
+const REMOVE = "REMOVE";
+const CLEAR = "CLEAR";
+const TOTAL = "TOTAL";
+// const DECREASE = "DECREASE"
+
+export { INCREASE, DECREASE, REMOVE, CLEAR, TOTAL };
