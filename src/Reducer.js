@@ -49,20 +49,29 @@ export function cartReducer(state, action) {
     };
   }
   if (action.type === TOTAL) {
-    let amount = 0;
-    let total = 0;
-    // const({amount : 0,total:0}) = state.reduce((prevValue,currValue) => {
-    //     return prevValue
-    // },{amount,total})
-    return {
-      ...state,
-      cart: state.cart.forEach((item) => {
-        amount += item.amount;
-        total += item.total;
-        item.amount = amount;
-        item.total = total;
-      }),
-    };
+    // let amount = 0;
+    // let total = 0;
+    let { amount, total } = state.cart.reduce(
+      (cartTotal, cartItem) => {
+        // console.log(cartItem, cartTotal);
+        cartTotal.amount += cartItem.amount;
+        cartTotal.total += cartItem.amount * cartItem.price;
+
+        return cartTotal;
+      },
+      { amount: 0, total: 0 }
+    );
+    // return {
+    //   ...state,
+    //   cart: state.cart.forEach((item) => {
+    //     amount += item.amount;
+    //     total += item.total;
+    //     item.amount = amount;
+    //     item.total = total;
+    //   }),
+    // };
+    total = parseFloat(total.toFixed(2));
+    return { ...state, amount, total };
   }
 
   return state;
